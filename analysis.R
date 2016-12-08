@@ -25,7 +25,6 @@ for (i in cols) {
 
   ol <- read.delim(paste0("data/outlines/", i, ".ol"), header = F)
   # The .ol (outline) file contains the coordinates for the outlines from ImageJ
-  ol[,2] <- dim(img)[1] - ol[,2]
 
   # Below adds the landmarks and outline to the image file
   img <- readJPEG(paste0("data/images/", i, ".JPG"))
@@ -34,6 +33,7 @@ for (i in cols) {
   plot(1, 1, xlim=c(1,dim(img)[2]), ylim=c(1,dim(img)[1]),type="n",xaxs="i",yaxs="i")
   rasterImage(img, 1, 1, dim(img)[2], dim(img)[1])
   points(lm[,1], dim(img)[1] - lm[,2], col = "blue", cex = 5*(dim(img)[1]/2000), pch = 20)
+  ol[,2] <- dim(img)[1] - ol[,2]
   lines(ol[,1], ol[,2], col = "red", lwd = 5*(dim(img)[1]/2000))
   dev.off()
 
